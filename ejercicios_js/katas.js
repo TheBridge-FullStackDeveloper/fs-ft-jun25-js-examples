@@ -24,5 +24,26 @@ function ordenarArray(numeros) {
   }
   return numeros;
 }
-console.log(ordenarArray([1,3,2,33,11,-2]));
+console.log(ordenarArray([1, 3, 2, 33, 11, -2]));
 
+// This problem was asked by Apple.
+// A fixed point in an array is an element whose value is equal to its index. Given
+// a sorted array of distinct elements, return a fixed point, if one exists.
+// Otherwise, return False.
+// For example, given [-6, 0, 2, 40], you should return 2. Given [1, 5, 7, 8], you
+// should return False
+
+// el valor del número es igual al índice de la posición
+
+function fixedPoint(arr) {
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] === i) {
+      return i;
+    }
+  }
+  return "False";
+}
+const arrayNum = [-6, 2, 9, 30];
+console.log(fixedPoint(arrayNum));
+console.log(fixedPoint([-6, 0, 2, 40]));
+console.log(fixedPoint([-6, 0, 2, 3]));

@@ -64,3 +64,30 @@ function contarPalabras2(nombre) {
 }
 
 console.log(contarPalabras2("Ana      "));
+
+//Diseña un algoritmo que imprima los números impares entre un número dado por el usuario y los siguientes 50 números
+// num = 3
+// num, num+1,num+2,num+3,.....num+50 -->  rango [num,num+50]
+function imprimeImpares(num){
+  for (let i = num; i <= num+50; i++) {
+    if(i%2 != 0){
+      console.log(i);
+    }
+  }
+}
+
+imprimeImpares(4);
+
+
+/***************************** */
+
+let numerosImpar = (num) => {
+  numImpar =[];
+  for(let i=num; i <= (num + 50); i++){
+      if(i % 2 !== 0){
+          numImpar.push(i);
+      }
+  } return numImpar
+}
+
+console.log(numerosImpar(2));
