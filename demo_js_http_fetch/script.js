@@ -81,3 +81,31 @@ function getAllBreeds(){
 // console.log(getAllBreeds());
 getAllBreeds().then(breeds => console.log(breeds));
 
+
+
+
+
+
+/*******************/
+
+
+
+/*********** Forma 1 ************/
+console.time("***timer1***");
+fetch("https://rickandmortyapi.com/api/character/1") // Datos de Rick
+  .then((res) => res.json())
+  .then((rickMortyData) => {
+    console.log("HA TERMINADO RICK Y MORTY 1");
+    console.log(rickMortyData);
+    const episode_url_3 = rickMortyData.episode[2]; // URL tercer episodio donde aparece
+
+    fetch(episode_url_3)
+      .then((res) => res.json())
+      .then((episode_data) => {
+        console.log("HA TERMINADO extracción datos del episodio");
+        console.log(episode_data);
+        console.log(episode_data.name); // nombre del episodio
+
+        console.timeEnd("***timer1***");
+      });
+  });
