@@ -90,7 +90,7 @@ getAllBreeds().then(breeds => console.log(breeds));
 
 
 
-/*********** Forma 1 ************/
+/*********** Forma 1 -- LLamada a la API anidada ************/
 console.time("***timer1***");
 fetch("https://rickandmortyapi.com/api/character/1") // Datos de Rick
   .then((res) => res.json())
