@@ -47,13 +47,14 @@ getProducts().then((data) => {
     li.textContent = product.title + " -- " + product.price + "€";
     ul.appendChild(li);
   });
+  
+  const contenedor = document.querySelector("#productos1");
   // Vaciar el DOM primero
-  const oldContent = document.body.firstChild;
-  while (document.body.firstChild) {
-    document.body.removeChild(document.body.firstChild);
+  while (contenedor.firstChild) {
+    contenedor.removeChild(contenedor.firstChild);
   }
   // Renderizar nuevos datos
-  document.body.appendChild(ul);
+  contenedor.appendChild(ul);
 });
 
 // Llamada a la función. Devuelve una promesa con los datos de la llamada a la API
@@ -66,7 +67,7 @@ getProducts().then((data) => {
   });
   list += "</ul>";
 
-  document.body.innerHTML = list;
+  document.querySelector("#productos2").innerHTML = list;
 });
 
 //   Utiliza la API (https://dog.ceo/dog-api/) para resolver estos ejercicios.
@@ -133,3 +134,99 @@ async function getEpisode3() {
 }
 
 getEpisode3().then((episode_3) => console.log(episode_3));
+
+
+/******************************** */
+
+// //ejercicio 5
+async function getRandomPokemonImage() {
+  
+      const min = 1;
+      const max = 1302;
+      const pokemonAleatorio = Math.floor(Math.random() * (max - min + 1)) + min;
+
+  try {
+      let response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonAleatorio}/`);
+      if (!response.ok) {
+          throw new Error(
+              `Error HTTP: ${response.status} - ${response.statusText}`
+          );
+      }
+      let data = await response.json();
+      let urlAleatoria = data.sprites.front_default;
+
+      return urlAleatoria;
+
+  } catch (error) {
+      console.log(`ERROR: ${error.stack}`);
+      throw new Error("socorro!")
+  }
+}
+getRandomPokemonImage()
+  .then((urlAleatoria) => console.log(urlAleatoria))
+  .catch(error => console.error("Algo salió mal:", error.message));
+
+
+//ejercicio 6
+async function pokemonPikachu() {
+  try {  
+      let response = await fetch(`https://pokeapi.co/api/v2/pokemon/pikachu`);
+      if (!response.ok) {
+          throw new Error(
+              `Error HTTP: ${response.status} - ${response.statusText}`
+          );
+      }
+      let data = await response.json();
+      let img = data.sprites.front_default;
+     return img;
+
+  } catch (error) {
+      console.log(`ERROR: ${error.stack}`);
+  }
+}
+
+async function dogPug() {
+  try {
+      let responseDos = await fetch (`https://dog.ceo/api/breed/pug/images`);
+              if (!responseDos.ok) {
+          throw new Error(
+              `Error HTTP: ${responseDos.status} - ${responseDos.statusText}`
+          );
+      }
+      let dataUno = await responseDos.json();
+      let todasLasImgPug = dataUno.message;
+
+      return todasLasImgPug;
+      } catch (error) {
+      console.log(`ERROR: ${error.stack}`);
+  }  
+
+}
+async function printPugVsPikachu() {
+  try {
+    const pikachuUrl = await pokemonPikachu();
+    const pugUrls = await dogPug();
+      
+    // const [pikachuUrl, pugUrls] = await Promise.all([
+    //     pokemonPikachu(), 
+    //     dogPug()    
+    // ]);
+      
+      const segundaImgPug = pugUrls[5];
+      console.log(segundaImgPug)
+      
+      let contenedor = document.getElementById("pikachu-pug");
+                contenedor.innerHTML = `
+              <div class="imagen-item">
+               <img src="${pikachuUrl}" alt="Imagen de Pikachu">
+              </div>
+              <h2> vs </h2>
+              <div class="imagen-item">
+              <img src="${segundaImgPug}" alt="Imagen de un pug">
+              </div>
+          `;
+    } catch (error) {
+      console.log(`ERROR: ${error.stack}`);
+  }
+}
+printPugVsPikachu()
